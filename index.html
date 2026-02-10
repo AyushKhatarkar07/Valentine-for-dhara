@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6e6;
+            font-family: 'Arial', sans-serif;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #ff4d4d;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .image-container {
+            margin-bottom: 20px;
+        }
+
+        /* Style for your photo */
+        .my-photo {
+            width: 250px;       /* Good size for desktop */
+            height: 250px;      /* Keeps it square/circle */
+            object-fit: cover;  /* Crops it nicely if it's rectangular */
+            border-radius: 20px; /* Rounded corners */
+            border: 5px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Style for the GIF */
+        .celebration-gif {
+            display: none; /* Hidden at start */
+            width: 250px;
+            border-radius: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            position: relative;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d4d;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            background-color: #ff3333;
+        }
+
+        #noBtn {
+            background-color: white;
+            color: #ff4d4d;
+            border: 2px solid #ff4d4d;
+            font-weight: bold;
+            position: absolute;
+            left: 150px;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .my-photo { width: 200px; height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="image-container">
+        <img id="mainImage" class="my-photo" src="us.jpeg" alt="Us ❤️">
+        
+        <img id="celebrationImage" class="celebration-gif" src="happy.gif" alt="Happy!">
+    </div>
+
+    <h1 id="question">Will you be my Valentine Babe? 🌹</h1>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="sheSaidYes()">YES</button>
+        <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">NO</button>
+    </div>
+
+    <audio id="loveSong" src="song.mp3"></audio>
+
+    <script>
+        function moveButton() {
+            var x = Math.random() * (window.innerWidth - 100) - window.innerWidth / 2;
+            var y = Math.random() * (window.innerHeight - 100) - window.innerHeight / 2;
+
+            var noBtn = document.getElementById('noBtn');
+            noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function sheSaidYes() {
+            // 1. Change Text
+            document.getElementById('question').innerText = "YAY! I knew you'd say yes, my KuchuPuchu! ❤️";
+            document.getElementById('question').style.color = "#ff0066";
+            
+            // 2. Hide Buttons
+            document.getElementById('yesBtn').style.display = 'none';
+            document.getElementById('noBtn').style.display = 'none';
+
+            // 3. Swap Image: Hide Photo, Show GIF
+            document.getElementById('mainImage').style.display = 'none';
+            document.getElementById('celebrationImage').style.display = 'block';
+
+            // 4. Play Music
+            var audio = document.getElementById("loveSong");
+            audio.play();
+        }
+    </script>
+
+</body>
+</html>
